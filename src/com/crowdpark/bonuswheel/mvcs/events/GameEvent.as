@@ -12,6 +12,7 @@ package com.crowdpark.bonuswheel.mvcs.events
 		public static const SHOW_RESULT : String = "SHOW_RESULT";
 		public static const SHARE_RESULT : String = "SHARE_RESULT";
 		public static const CONTINUE : String = "CONTINUE";
+		public static const DETECT_CURRENT_SCORE : String = "DETECT_CURRENT_SCORE";
 
 		public function GameEvent(type : String, bubbles : Boolean = false, cancelable : Boolean = true)
 		{

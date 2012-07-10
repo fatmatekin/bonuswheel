@@ -1,5 +1,6 @@
 package com.crowdpark.bonuswheel.mvcs.views.gameview
 {
+	import com.crowdpark.bonuswheel.mvcs.models.WheelModel;
 	import com.crowdpark.bonuswheel.mvcs.models.ScoreModel;
 
 	import flash.events.Event;
@@ -18,24 +19,28 @@ package com.crowdpark.bonuswheel.mvcs.views.gameview
 		public var dataModel : DataModel;
 		[Inject]
 		public var scoreModel : ScoreModel;
+		[Inject]
+		public var wheelModel : WheelModel;
 
 		override public function onRegister() : void
 		{
 			super.onRegister();
 
-			view.createWheel(dataModel.getWheelParts());
+			view.createWheel(wheelModel.getWheelPartsVector());
 
-			addViewListener(GameView.SET_CURRENT_SCORE, onSetCurrentScoreListener);
+			addViewListener(GameView.DETECT_CURRENT_SCORE, onDetectCurrentScoreListener);
+
 			addContextListener(GameEvent.START_GAME, onStartGameListener);
 		}
 
-		private function onSetCurrentScoreListener(event : Event) : void
+		private function onDetectCurrentScoreListener(event : Event) : void
 		{
-			var gameEvent : GameEvent = new GameEvent(GameEvent.SET_CURRENT_SCORE);
-			gameEvent.getDataProvider().setValueByKey('currentScore', uint(view.getDataProvider().getValueByKey('currentScore')));
+			var gameEvent : GameEvent = new GameEvent(GameEvent.DETECT_CURRENT_SCORE);
+			gameEvent.getDataProvider().setValueByKey('wheelRotation', view.getDataProvider().getValueByKey('wheelRotation'));
 			dispatch(gameEvent);
 		}
 
+		
 		private function onStartGameListener(event : GameEvent) : void
 		{
 			view.startSpin();

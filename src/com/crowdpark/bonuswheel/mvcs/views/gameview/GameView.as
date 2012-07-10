@@ -1,30 +1,26 @@
 package com.crowdpark.bonuswheel.mvcs.views.gameview
 {
 	import com.crowdpark.bonuswheel.mvcs.assets.Wheel;
-	import com.crowdpark.bonuswheel.mvcs.assets.WheelPart;
 	import com.crowdpark.bonuswheel.mvcs.core.BaseView;
+	import com.crowdpark.bonuswheel.mvcs.models.vo.WheelPartVo;
 	import com.greensock.TweenMax;
 	import com.greensock.easing.Linear;
 
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.geom.Point;
 
 	/**
 	 * @author fatmatekin
 	 */
 	public class GameView extends BaseView
 	{
-		public static const SET_CURRENT_SCORE : String = "SET_CURRENT_SCORE";
+		public static const DETECT_CURRENT_SCORE : String = "DETECT_CURRENT_SCORE";
 		private var Stopper : Class = Assets.STOPPER;
 		private var _wheelContainer : Sprite = new Sprite();
 		private var _wheel : Wheel;
 		private var _speed : int = 150;
 		private var _wheelStopper : Bitmap;
-		private var _stopperPoint : Point;
-		private var _closest : WheelPart;
-		private var _minDistance : uint;
 
 		public function init() : void
 		{
@@ -37,18 +33,17 @@ package com.crowdpark.bonuswheel.mvcs.views.gameview
 		{
 			super.onAddedToStageListener(event);
 			_wheelStopper.x = (stage.stageWidth - _wheelStopper.width) / 2;
-			_stopperPoint = new Point(_wheelStopper.x + (_wheelStopper.width / 2), _wheelStopper.height);
 
 			_wheelContainer.x = (stage.stageWidth / 2);
 			_wheelContainer.y = (stage.stageHeight / 2);
 		}
 
-		public function createWheel(arr : Array) : void
+		public function createWheel(wheelParts : Vector.<WheelPartVo>) : void
 		{
-			getDataProvider().setValueByKey('wheelArray', arr);
+			getDataProvider().setValueByKey('wheelArray', wheelParts);
 
 			_wheel = new Wheel();
-			_wheelContainer.addChild(_wheel.createParts(arr));
+			_wheelContainer.addChild(_wheel.createParts(wheelParts));
 		}
 
 		public function getWheelContiner() : Sprite
@@ -58,7 +53,12 @@ package com.crowdpark.bonuswheel.mvcs.views.gameview
 
 		public function startSpin() : void
 		{
-			doTween();
+			// doTween();
+			addEventListener(Event.ENTER_FRAME, onEnterFrameListener);
+		}
+
+		private function onEnterFrameListener(event : Event) : void
+		{
 		}
 
 		private function doTween() : void
@@ -72,39 +72,15 @@ package com.crowdpark.bonuswheel.mvcs.views.gameview
 			else
 			{
 				_speed = 100;
-				detectWonAmount();
+				detectWheelRotation();
 			}
 		}
 
-		private function detectWonAmount() : void
+		private function detectWheelRotation() : void
 		{
-			var wheelArray : Vector.<WheelPart> = _wheel.getPartsSpriteArray();
-			_minDistance = 500;
-			for (var i : uint = 0;i < wheelArray.length;i++)
-			{
-				var wheelPart : WheelPart = wheelArray[i];
-				var indicatorPoint : Point = wheelPart.getIndicator();
-
-				var distance = Point.distance(_stopperPoint, wheelPart.localToGlobal(indicatorPoint));
-				if (distance < _minDistance)
-				{
-					_minDistance = distance;
-					setClosest(wheelPart);
-				}
-			}
-
-			getDataProvider().setValueByKey('currentScore', uint(getClosest().getCoinsField().text));
-			dispatchEvent(new Event(GameView.SET_CURRENT_SCORE));
-		}
-
-		public function getClosest() : WheelPart
-		{
-			return _closest;
-		}
-
-		public function setClosest(closest : WheelPart) : void
-		{
-			_closest = closest;
+			var wheelRotation : int = _wheelContainer.rotation;
+			getDataProvider().setValueByKey('wheelRotation', wheelRotation);
+			dispatchEvent(new Event(GameView.DETECT_CURRENT_SCORE));
 		}
 	}
 }

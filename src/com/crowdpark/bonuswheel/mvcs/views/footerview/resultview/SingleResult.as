@@ -1,4 +1,4 @@
-package com.crowdpark.bonuswheel.mvcs.assets
+package com.crowdpark.bonuswheel.mvcs.views.footerview.resultview
 {
 	import utils.textField.createField;
 

@@ -1,7 +1,5 @@
 package com.crowdpark.bonuswheel.mvcs.assets
 {
-	import flash.geom.Point;
-
 	import utils.draw.createCircleShape;
 	import utils.textField.createField;
 
@@ -21,7 +19,6 @@ package com.crowdpark.bonuswheel.mvcs.assets
 		private var _background : Bitmap;
 		private var _coinsField : TextField;
 		private var _seperator : Shape;
-		private var _indicator : Point;
 
 		public function WheelPart()
 		{
@@ -39,8 +36,6 @@ package com.crowdpark.bonuswheel.mvcs.assets
 
 			_seperator.x = _background.width;
 			_seperator.y = _background.y;
-
-			_indicator = new Point(_background.width, 0);
 		}
 
 		public function getCoinsField() : TextField
@@ -77,7 +72,7 @@ package com.crowdpark.bonuswheel.mvcs.assets
 
 		public function setRotation(number : int) : void
 		{
-			this.rotation = -number;
+			this.rotation = number;
 		}
 
 		public function getRotation() : int
@@ -93,16 +88,6 @@ package com.crowdpark.bonuswheel.mvcs.assets
 			}
 
 			return _seperator;
-		}
-
-		public function getIndicator() : Point
-		{
-			return _indicator;
-		}
-
-		public function setIndicator(indicator : Point) : void
-		{
-			_indicator = indicator;
 		}
 	}
 }

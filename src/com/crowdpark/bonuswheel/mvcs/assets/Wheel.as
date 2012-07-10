@@ -1,5 +1,7 @@
 package com.crowdpark.bonuswheel.mvcs.assets
 {
+	import com.crowdpark.bonuswheel.mvcs.models.vo.WheelPartVo;
+
 	import flash.display.Sprite;
 
 	/**
@@ -10,13 +12,14 @@ package com.crowdpark.bonuswheel.mvcs.assets
 		private var _partsContainer : Sprite = new Sprite();
 		private var _partsSpriteArray : Vector.<WheelPart>;
 
-		public function createParts(arr : Array) : Sprite
+		public function createParts(wheelParts : Vector.<WheelPartVo>) : Sprite
 		{
-			for (var i : uint = 0;i < arr.length;i++)
+			for (var i : uint = 0;i < wheelParts.length;i++)
 			{
 				var wheelPart : WheelPart = new WheelPart();
-				wheelPart.getCoinsField().text = String(arr[i]);
-				wheelPart.setRotation(i * (360 / arr.length));
+				wheelPart.getCoinsField().text = String(wheelParts[i].getCoins());
+				wheelPart.setRotation(wheelParts[i].getRotation());
+
 				_partsContainer.addChild(wheelPart);
 				getPartsSpriteArray().push(wheelPart);
 			}

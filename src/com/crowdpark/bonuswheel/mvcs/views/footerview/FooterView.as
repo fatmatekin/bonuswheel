@@ -58,13 +58,9 @@ package com.crowdpark.bonuswheel.mvcs.views.footerview
 		{
 			_background.height = 150;
 
-			TweenMax.to(this, 1, {y:-50});
+			TweenMax.to(this, 0.5, {y:-50});
 
-			var resultView : ResultView = new ResultView();
-			resultView.setDailyBonusField(dailyBonus);
-			resultView.setLikeField(likeBonus);
-			resultView.setFriendsField(friendsBonus);
-			resultView.setTotalWin(dailyBonus + friendsBonus + likeBonus);
+			var resultView : ResultView = new ResultView(dailyBonus, likeBonus, friendsBonus);
 			addChild(resultView);
 
 			resultView.y = _background.y;
@@ -106,7 +102,7 @@ package com.crowdpark.bonuswheel.mvcs.views.footerview
 
 		public function closeFooter() : void
 		{
-			TweenMax.to(this, 1, {y:_background.height});
+			TweenMax.to(this, 0.5, {y:_background.height});
 			removeChild(_startButton);
 		}
 	}
