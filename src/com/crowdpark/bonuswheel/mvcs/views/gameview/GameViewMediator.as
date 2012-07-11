@@ -40,10 +40,8 @@ package com.crowdpark.bonuswheel.mvcs.views.gameview
 			dispatch(gameEvent);
 		}
 
-		
 		private function onStartGameListener(event : GameEvent) : void
 		{
-			view.startSpin();
 		}
 
 		public function get view() : GameView

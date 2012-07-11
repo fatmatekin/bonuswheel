@@ -22,7 +22,7 @@ package com.crowdpark.bonuswheel.mvcs.views.footerview
 		{
 			super.onRegister();
 			view.addBackground();
-			view.addStartButton();
+			//view.addStartButton();
 
 			addViewListener(FooterView.START_GAME_EVENT, onStartGameListener);
 			addViewListener(FooterView.SHARE, onShareResultListener);

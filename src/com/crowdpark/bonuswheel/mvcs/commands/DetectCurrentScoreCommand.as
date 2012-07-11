@@ -19,7 +19,7 @@ package com.crowdpark.bonuswheel.mvcs.commands
 		{
 			var wheelRotation : int = int(gameEvent.getDataProvider().getValueByKey('wheelRotation'));
 
-			wheelModel.setWheelRotation(wheelRotation % 360);
+			wheelModel.setWheelRotation(wheelRotation);
 			wheelModel.detectCurrentWheelPart();
 		}
 	}

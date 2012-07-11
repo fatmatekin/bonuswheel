@@ -31,8 +31,8 @@ package com.crowdpark.bonuswheel.mvcs.views.footerview
 			_background.width = stage.stageWidth;
 			_background.y = stage.stageHeight - _background.height;
 
-			_startButton.x = (stage.stageWidth - _startButton.width) / 2;
-			_startButton.y = stage.stageHeight - (_background.height - _startButton.height / 2);
+			// _startButton.x = (stage.stageWidth - _startButton.width) / 2;
+			// _startButton.y = stage.stageHeight - (_background.height - _startButton.height / 2);
 		}
 
 		public function addBackground() : void
