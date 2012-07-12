@@ -1,5 +1,4 @@
-package com.crowdpark.bonuswheel.mvcs.views.gameview
-{
+package com.crowdpark.bonuswheel.mvcs.views.gameview {
 	import com.crowdpark.bonuswheel.mvcs.models.WheelModel;
 	import com.crowdpark.bonuswheel.mvcs.models.ScoreModel;
 
@@ -13,8 +12,7 @@ package com.crowdpark.bonuswheel.mvcs.views.gameview
 	/**
 	 * @author fatmatekin
 	 */
-	public class GameViewMediator extends Mediator
-	{
+	public class GameViewMediator extends Mediator {
 		[Inject]
 		public var dataModel : DataModel;
 		[Inject]
@@ -22,8 +20,7 @@ package com.crowdpark.bonuswheel.mvcs.views.gameview
 		[Inject]
 		public var wheelModel : WheelModel;
 
-		override public function onRegister() : void
-		{
+		override public function onRegister() : void {
 			super.onRegister();
 
 			view.createWheel(wheelModel.getWheelPartsVector());
@@ -33,19 +30,16 @@ package com.crowdpark.bonuswheel.mvcs.views.gameview
 			addContextListener(GameEvent.START_GAME, onStartGameListener);
 		}
 
-		private function onDetectCurrentScoreListener(event : Event) : void
-		{
+		private function onDetectCurrentScoreListener(event : Event) : void {
 			var gameEvent : GameEvent = new GameEvent(GameEvent.DETECT_CURRENT_SCORE);
 			gameEvent.getDataProvider().setValueByKey('wheelRotation', view.getDataProvider().getValueByKey('wheelRotation'));
 			dispatch(gameEvent);
 		}
 
-		private function onStartGameListener(event : GameEvent) : void
-		{
+		private function onStartGameListener(event : GameEvent) : void {
 		}
 
-		public function get view() : GameView
-		{
+		public function get view() : GameView {
 			return viewComponent as GameView;
 		}
 	}

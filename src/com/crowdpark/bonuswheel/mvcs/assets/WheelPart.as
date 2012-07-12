@@ -1,10 +1,10 @@
 package com.crowdpark.bonuswheel.mvcs.assets
 {
-	import utils.draw.createCircleShape;
 	import utils.textField.createField;
 
+	import com.crowdpark.bonuswheel.mvcs.views.gameview.spinner.SeparatorCircle;
+
 	import flash.display.Bitmap;
-	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.text.TextField;
@@ -18,7 +18,7 @@ package com.crowdpark.bonuswheel.mvcs.assets
 		private var WheelBackground : Class = Assets.WHEEL_BACKGROUND;
 		private var _background : Bitmap;
 		private var _coinsField : TextField;
-		private var _seperator : Shape;
+		private var _seperator : SeparatorCircle;
 
 		public function WheelPart()
 		{
@@ -70,9 +70,10 @@ package com.crowdpark.bonuswheel.mvcs.assets
 			_background = background;
 		}
 
-		public function setRotation(number : int) : void
+		public function setRotation(rotationVal : int) : void
 		{
-			this.rotation = number;
+			this.rotation = rotationVal;
+			_seperator.setRotation(rotationVal);
 		}
 
 		public function getRotation() : int
@@ -80,11 +81,11 @@ package com.crowdpark.bonuswheel.mvcs.assets
 			return this.rotation;
 		}
 
-		public function getSeperator() : Shape
+		public function getSeperator() : SeparatorCircle
 		{
 			if (!_seperator)
 			{
-				_seperator = createCircleShape(10, 0xff0000, 1, 0, 0);
+				_seperator = new SeparatorCircle();
 			}
 
 			return _seperator;
